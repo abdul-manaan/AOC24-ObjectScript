@@ -1,6 +1,5 @@
 # Specify the base image with a version tag
-ARG IMAGE=intersystemsdc/iris-community:latest
-FROM $IMAGE
+FROM intersystemsdc/iris-community:latest
 
 # Set the working directory
 WORKDIR /opt/irisapp
