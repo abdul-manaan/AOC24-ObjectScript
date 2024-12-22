@@ -1,18 +1,19 @@
-ARG IMAGE=intersystemsdc/irishealth-community:2020.3.0.200.0-zpm
-ARG IMAGE=intersystemsdc/iris-community:2020.3.0.221.0-zpm
-ARG IMAGE=intersystemsdc/iris-community:2020.4.0.524.0-zpm
-ARG IMAGE=intersystemsdc/iris-community
+# Specify the base image with a version tag
+ARG IMAGE=intersystemsdc/iris-community:latest
 FROM $IMAGE
 
-        
+# Set the working directory
 WORKDIR /opt/irisapp
+
+# Define build arguments with default values
 ARG TESTS=0
 ARG MODULE="aoc2024-ObjectScript"
 ARG NAMESPACE="IRISAPP"
 
-#COPY  Installer.cls .
+# Install and configure the application
 RUN --mount=type=bind,src=.,dst=. \
     iris start IRIS && \
-	iris session IRIS < iris.script && \
-    ([ $TESTS -eq 0 ] || iris session iris -U $NAMESPACE "##class(%ZPM.PackageManager).Shell(\"test $MODULE -v -only\",1,1)") && \
+    iris session IRIS < iris.script && \
+    ([ "$TESTS" -eq 0 ] || \
+    iris session iris -U "$NAMESPACE" "##class(%ZPM.PackageManager).Shell(\"test $MODULE -v -only\",1,1)") && \
     iris stop IRIS quietly
