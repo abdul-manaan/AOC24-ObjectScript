@@ -1,6 +1,10 @@
 # Specify the base image with a version tag
 FROM intersystemsdc/iris-community:2023.1.4.580.0-zpm
 
+RUN addgroup -S irisgrp || true \
+    && adduser -S irisowner -G irisgrp || true
+
+USER irisowner
 # Set the working directory
 WORKDIR /opt/irisapp
 
