@@ -124,7 +124,7 @@ ClassMethod findScoresFromStartingPos(ByRef map, start, end, totalCheatTime, thr
     s pqueue(0) = 0
     s pqueue(0,0) = $p(start,",",1)_"|"_$p(start,",",2)_"|0"
     
-    s bestScore = ..findShortestPath(.map,start,end,.uniqueNodes, .pqueue)
+    do ..findShortestPath(.map,start,end,.uniqueNodes, .pqueue)
 
     s answer = 0
     for i=2:1:(map-1) {

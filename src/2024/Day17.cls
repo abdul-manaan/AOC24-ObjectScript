@@ -18,9 +18,6 @@ ClassMethod Part2(filename = "") As %Integer
         set line2=stream.ReadLine()
         set line3=stream.ReadLine()
 
-        s rA = $p(line1,": ",2)
-        s rB = $p(line2,": ",2)
-        s rC = $p(line3,": ",2)
         do stream.ReadLine()
         set line4 = stream.ReadLine()
 
