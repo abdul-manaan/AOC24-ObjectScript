@@ -105,7 +105,6 @@ ClassMethod CalcXMASAllDirectionsPart2(ByRef input, row, col)
         s cords = $PIECE(directions,":",i)
         s xcord = $PIECE(cords,",",1)
         s ycord = $PIECE(cords,",",2)
-        s toFind = "XMAS"
         s newRow = row + xcord
         s newCol = col + ycord
         

@@ -8,7 +8,8 @@ ClassMethod GetInput(fn) As %Stream.FileCharacter
    
     set fn=..#Folder_fn
     set stream = ##Class(%Stream.FileCharacter).%New()
-    set sc=stream.LinkToFile(fn)
+    do stream.LinkToFile(fn)
+    
     return stream
 }
 

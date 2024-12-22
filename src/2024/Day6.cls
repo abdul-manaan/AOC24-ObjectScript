@@ -124,7 +124,6 @@ ClassMethod AreWeStuck(ByRef puzzleMap, row, col = 0) As %Integer
 
     s rowDir = -1
     s colDir = 0
-    s stuckCounter = 0
     s visitedPositions = ""
 
     for {

@@ -31,7 +31,7 @@ ClassMethod Part2(filename = "") As %Integer
     s pqueue(1) = 2
     s pqueue(1,1) = $p(end,",",1)_"|"_$p(end,",",2)_"|"_"0|W|0"
     s pqueue(1,2) = $p(end,",",1)_"|"_$p(end,",",2)_"|"_"0|S|0"
-    s sum2 = ..findShortestPath(.map,end,start,.uniqueNodes2,.pqueue)
+    do ..findShortestPath(.map,end,start,.uniqueNodes2,.pqueue)
 
     s count = 0
 
@@ -119,7 +119,6 @@ ClassMethod findShortestPath(ByRef map, start, end, ByRef uniqueNodes, ByRef pqu
         s cY = $p(pqueue(it,it2),"|",2)
         s gn = $p(pqueue(it,it2),"|",3)
         s prevDir = $p(pqueue(it,it2),"|",4)
-        s parentID = $p(pqueue(it,it2),"|",5)
 
         KILL pqueue(it,it2)
 

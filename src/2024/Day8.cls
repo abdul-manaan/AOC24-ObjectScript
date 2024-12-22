@@ -145,7 +145,7 @@ ClassMethod CalculateUniqueAntiNodes2(ByRef inpuFrequencies, totalCols) As %Inte
                 s rowDiff = $zabs(row1-row2)
                 s colDiff = $zabs(col1-col2)
 
-                s newR1="",newR2="",newC1="",newC2 = ""
+                s newR1="",newC1=""
                 s newR1 = row1
                 s newC1 = col1
                 for {

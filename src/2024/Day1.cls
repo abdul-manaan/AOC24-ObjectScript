@@ -29,7 +29,7 @@ ClassMethod Part2(filename = "") As %Integer
     s num1 = ""
     s num2 = ""
     s count1 = 0
-    s count2 = 0
+    
     while 1 {
         set num1 = $order(firstList(num1),1,count1)
         quit:(num1 = "")

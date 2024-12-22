@@ -51,7 +51,6 @@ ClassMethod Part1(filename = "") As %Integer
 
 ClassMethod getNthSecret(number, n)
 {
-    s orig = number
     for i=1:1:n {
         set number = ..applyStep3(..applyStep2(..applyStep1(number)))
     }
@@ -84,7 +83,6 @@ ClassMethod applyStep3(secret)
 
 ClassMethod getNthSecretWithDP(number, n, ByRef dp, idx, ByRef maxBananas)
 {
-    s orig = number
     s seq = ",,,"
     s newUnit = number#10
     for i=1:1:n {

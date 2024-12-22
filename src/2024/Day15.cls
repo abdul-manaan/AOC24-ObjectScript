@@ -78,8 +78,6 @@ ClassMethod Part1(filename = "") As %Integer
 ClassMethod MoveRobot(ByRef map, moves As %String, ispart2 = 0)
 {
     s robotPos = ..GetRobotPos(.map)
-    s robotPosX = $p(robotPos,",",1)
-    s robotPosY = $p(robotPos,",",2)
     for i=1:1:$l(moves) {
         s move = $e(moves,i,i)
         continue:(move=" ")

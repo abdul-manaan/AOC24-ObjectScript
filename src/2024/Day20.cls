@@ -119,9 +119,6 @@ ClassMethod findShortestPath(ByRef map, start, end, ByRef visited, ByRef pqueue)
 
 ClassMethod findScoresFromStartingPos(ByRef map, start, end, totalCheatTime, threshold = 99)
 {
-    s endX = $p(end,",",1)
-    s endY = $p(end,",",2)
-    
     KILL uniqueNodes,pqueue
     s pqueue = 1
     s pqueue(0) = 0
@@ -129,13 +126,11 @@ ClassMethod findScoresFromStartingPos(ByRef map, start, end, totalCheatTime, thr
     
     s bestScore = ..findShortestPath(.map,start,end,.uniqueNodes, .pqueue)
 
-    s ans = ""
     s answer = 0
     for i=2:1:(map-1) {
         for j=2:1:($l(map(i))-1) {
             continue:($e(map(i),j,j) = "#")
             continue:($get(uniqueNodes(i,j),-1) = -1)
-            s scoreToReachIJ = uniqueNodes(i,j)
 
             s di = 0
             for dj = 1:1:totalCheatTime {

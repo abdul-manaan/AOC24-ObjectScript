@@ -11,8 +11,6 @@ ClassMethod Part2(filename = "") As %Integer
     }
     set stream=..GetInput(filename)
     set sum = 0
-    set firstList = ""
-    set secondList = ""
     s shouldDo = 1
 	while 'stream.AtEnd {
 		set line=stream.ReadLine()
@@ -46,7 +44,6 @@ ClassMethod ExtractValidMulInstructions1(input) As %Integer
 {
     SET result=0
     SET i=1
-    SET len=$LENGTH(input)
     
     FOR  {
         SET i=$FIND(input, "mul(", i) 
@@ -70,7 +67,6 @@ ClassMethod ExtractValidMulInstructions2(input, ByRef shouldDo) As %Integer
 {
     SET result=0
     SET i=1
-    SET len=$LENGTH(input)
     FOR  {
         SET origI = i
         SET i=$FIND(input, "mul(", origI) 

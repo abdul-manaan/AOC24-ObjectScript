@@ -48,7 +48,6 @@ ClassMethod Part1(filename = "") As %Integer
 
     for i=1:1:25 {
         s sum = ..Blink(.stones)
-        s st=""
     }
     
     w "SUM is: "_sum,!
@@ -89,7 +88,7 @@ ClassMethod ApplyRule(Stone, ByRef newStone)
 ClassMethod Part2Sol(ByRef stones, ByRef ans)
 {
     for i=1:1:25 {
-        s sum = ..Blink(.stones)
+        do ..Blink(.stones)
     }
 
     s st=""

@@ -12,7 +12,7 @@ ClassMethod Part2(filename = "") As %Integer
     set stream=..GetInput(filename)
     set sum = 0
 
-	s program="",rA=0,rB=0,rC=0
+	s program=""
 	while 'stream.AtEnd {
 		set line1=stream.ReadLine()
         set line2=stream.ReadLine()
@@ -42,7 +42,6 @@ ClassMethod Part1(filename = "") As %Integer
         s filename = ..#InputFile
     }
     set stream=..GetInput(filename)
-    set sum = 0
 
     s program="",rA=0,rB=0,rC=0
 	while 'stream.AtEnd {
