@@ -13,10 +13,10 @@ ClassMethod Part2(filename = "") As %Integer
     set sum = 0
     set firstList = ""
     set secondList = ""
-    s do = 1
+    s shouldDo = 1
 	while 'stream.AtEnd {
 		set line=stream.ReadLine()
-        s sum = sum + ..ExtractValidMulInstructions2(line,.do)
+        s sum = sum + ..ExtractValidMulInstructions2(line,.shouldDo)
     }
     
     w "SUM is: "_sum,!
@@ -66,7 +66,7 @@ ClassMethod ExtractValidMulInstructions1(input) As %Integer
     QUIT result
 }
 
-ClassMethod ExtractValidMulInstructions2(input, ByRef do) As %Integer
+ClassMethod ExtractValidMulInstructions2(input, ByRef shouldDo) As %Integer
 {
     SET result=0
     SET i=1
@@ -80,12 +80,12 @@ ClassMethod ExtractValidMulInstructions2(input, ByRef do) As %Integer
         SET nextDontOffset = $FIND(input, "don't()", origI)
         if (nextDoOffset < i) && (nextDoOffset '= 0) {
             set i = nextDoOffset
-            set do = 1
+            set shouldDo = 1
             continue
         }
         if (nextDontOffset < i) && (nextDontOffset '= 0) {
             set i = nextDontOffset
-            set do = 0
+            set shouldDo = 0
             continue
         }
         IF (endPos > i) {
@@ -94,7 +94,7 @@ ClassMethod ExtractValidMulInstructions2(input, ByRef do) As %Integer
                 SET num1=$PIECE(content, ",", 1)
                 SET num2=$PIECE(content, ",", 2)
                 IF (num1?1.3N) && (num2?1.3N) {
-                    SET:(do=1) result=result+(num1*num2)
+                    SET:(shouldDo=1) result=result+(num1*num2)
                 }
             } 
         }
