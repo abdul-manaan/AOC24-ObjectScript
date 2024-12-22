@@ -30,4 +30,21 @@ ClassMethod ParseString(str As %String, Output ans) As %Status
     return $$$OK
 }
 
+ClassMethod Part1(filename)
+{
+}
+
+ClassMethod Part2(filename)
+{
+}
+
+ClassMethod Run()
+{
+	set part1 = ..Part1()
+	set part2 = ..Part2()
+
+    write "Part-1: ", part1,!
+    write "Part-2: ", part2,!
+}
+
 }
