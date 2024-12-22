@@ -1,5 +1,5 @@
 # Specify the base image with a version tag
-FROM intersystemsdc/iris-community:latest
+FROM intersystemsdc/iris-community:2023.1.4.580.0-zpm
 
 # Set the working directory
 WORKDIR /opt/irisapp
