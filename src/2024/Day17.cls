@@ -14,9 +14,9 @@ ClassMethod Part2(filename = "") As %Integer
 
 	s program=""
 	while 'stream.AtEnd {
-		set line1=stream.ReadLine()
-        set line2=stream.ReadLine()
-        set line3=stream.ReadLine()
+		do stream.ReadLine()
+        do stream.ReadLine()
+        do stream.ReadLine()
 
         do stream.ReadLine()
         set line4 = stream.ReadLine()
