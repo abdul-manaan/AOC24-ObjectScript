@@ -38,10 +38,10 @@ ClassMethod Part2(filename)
 {
 }
 
-ClassMethod Run()
+ClassMethod Run(filename AS %String = "")
 {
-	set part1 = ..Part1()
-	set part2 = ..Part2()
+	set part1 = ..Part1(filename)
+	set part2 = ..Part2(filename)
 
     write "Part-1: ", part1,!
     write "Part-2: ", part2,!
