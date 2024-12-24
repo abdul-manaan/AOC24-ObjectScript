@@ -78,7 +78,7 @@ ClassMethod Part1(filename = "") As %Integer
     for {
         s node = $o(uniqueNodes(node))
         q:(node="")
-        s graphLen = ..findAll3ConnectedNodes(.nodeMap,.dfs,node, $I(idx))
+        do ..findAll3ConnectedNodes(.nodeMap,.dfs,node, $I(idx))
     }
     s it = ""
     for {
