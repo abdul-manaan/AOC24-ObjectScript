@@ -49,7 +49,7 @@ Note: SUM (Solution Unveiling Moment) is the answer for that part and Time is th
 | Day 21 | 0.001791133 | 0.023660914   |
 | Day 22 | 6.764094565 | 18.955308598  |
 | Day 23 | 0.064578856 | 2.225752621   |
-| Day 24 | - | - |
+| Day 24 | 0.009010558 | 0.005571736   |
 | Day 25 | - | - |
 
 
