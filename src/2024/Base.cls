@@ -47,4 +47,23 @@ ClassMethod Run(filename AS %String = "")
     write "Part-2: ", part2,!
 }
 
+ClassMethod RunAll(filenamePrefix As %String = "")
+{
+    s answers = 0
+    for day=1:1:24 {
+        s className = "aoc24.Day"_day
+        s filename = day
+        if day < 10 {
+            s filename = "0"_filename
+        }
+        s filename = filenamePrefix_filename_".txt"
+        s answers(day,1)= $CLASSMETHOD(className,"Part1",filename)
+        s answers(day,2)= $CLASSMETHOD(className,"Part2",filename)
+    }
+	
+    for day=1:1:24 {
+        w "day"_day_": "_ answers(day,1)_ " " _ answers(day,2),!
+    }
+}
+
 }

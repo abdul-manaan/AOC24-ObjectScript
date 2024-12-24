@@ -5,10 +5,16 @@
 ## How to Execute?
  For each day, we can compile and execute the code using following commands:
 ```IRIS
-do $system.OBJ.Compile("aoc24.Day1")
+do $system.OBJ.CompileAll()
+
 do ##class(aoc24.Day1).Run() // This will run both parts
 do ##class(aoc24.Day1).Part1()
 do ##class(aoc24.Day1).Part2()
+```
+To Run all the parts for all days, you can do this using:
+```
+# The Format is RunAll(fileNamePrefix)
+do ##class(aoc24.Day1).RunAll("AoC2024_test/set2/day")
 ```
 Note: 
 1. Replace Day1 by any day from 1-25
