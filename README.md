@@ -56,7 +56,7 @@ Note: SUM (Solution Unveiling Moment) is the answer for that part and Time is th
 | Day 22 | 6.764094565 | 18.955308598  |
 | Day 23 | 0.064578856 | 2.225752621   |
 | Day 24 | 0.009010558 | 0.005571736   |
-| Day 25 | - | - |
+| Day 25 | 0.010005084 | 0.238924875   |
 
 
 ## Prerequisites
@@ -67,7 +67,7 @@ Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installi
 1. Clone/git pull the repo into any local directory
 
 ```bash
-git clone git@github.com:abdul-manaan/AOC-ObjectScript.git
+git clone git@github.com:abdul-manaan/AOC24-ObjectScript.git
 ```
 
 2. Open the terminal in this directory and run:
