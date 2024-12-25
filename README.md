@@ -67,7 +67,7 @@ Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installi
 1. Clone/git pull the repo into any local directory
 
 ```bash
-git clone git@github.com:abdul-manaan/AdventOfCode2024.git
+git clone git@github.com:abdul-manaan/AOC-ObjectScript.git
 ```
 
 2. Open the terminal in this directory and run:
