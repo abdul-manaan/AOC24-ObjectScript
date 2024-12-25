@@ -50,7 +50,7 @@ ClassMethod Run(filename AS %String = "")
 ClassMethod RunAll(filenamePrefix As %String = "")
 {
     s answers = 0
-    for day=1:1:24 {
+    for day=1:1:25 {
         s className = "aoc24.Day"_day
         s filename = day
         if day < 10 {
@@ -61,7 +61,7 @@ ClassMethod RunAll(filenamePrefix As %String = "")
         s answers(day,2)= $CLASSMETHOD(className,"Part2",filename)
     }
 	
-    for day=1:1:24 {
+    for day=1:1:25 {
         w "day"_day_": "_ answers(day,1)_ " " _ answers(day,2),!
     }
 }
