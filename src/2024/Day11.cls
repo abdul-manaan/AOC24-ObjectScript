@@ -10,7 +10,6 @@ ClassMethod Part2(filename = "") As %Integer
         s filename = ..#InputFile
     }
     set stream=..GetInput(filename)
-    set sum = 0
 
     s stones = 0
 	while 'stream.AtEnd {
@@ -21,7 +20,7 @@ ClassMethod Part2(filename = "") As %Integer
         }
     }
 
-    s sum = ..sovlePart2(.stones)
+    s sum = ..solveForNumberOfBlinks(.stones, 75)
     
     w "SUM is: "_sum,!
     w "Time: ", $p($ZTIMESTAMP,",",2)-startTime,!
@@ -35,7 +34,6 @@ ClassMethod Part1(filename = "") As %Integer
         s filename = ..#InputFile
     }
     set stream=..GetInput(filename)
-    set sum = 0
 
     s stones = 0
 	while 'stream.AtEnd {
@@ -46,29 +44,11 @@ ClassMethod Part1(filename = "") As %Integer
         }
     }
 
-    for i=1:1:25 {
-        s sum = ..Blink(.stones)
-    }
+    s sum = ..solveForNumberOfBlinks(.stones, 25)
     
     w "SUM is: "_sum,!
     w "Time: ", $p($ZTIMESTAMP,",",2)-startTime,!
     return sum
-}
-
-ClassMethod Blink(ByRef stones) As %Integer
-{
-    s stoneID = ""
-    s totalStones=stones
-    for stoneID=1:1:totalStones{
-        s newStone = stones(stoneID)
-        do ..ApplyRule(stones(stoneID), .newStone)
-        s stones(stoneID) = newStone(0)
-        if (newStone=2) {
-            s stones($I(stones)) = newStone(1)
-        }
-        KILL newStone
-    }
-    return stones
 }
 
 ClassMethod ApplyRule(Stone, ByRef newStone)
@@ -85,60 +65,35 @@ ClassMethod ApplyRule(Stone, ByRef newStone)
     }
 }
 
-ClassMethod Part2Sol(ByRef stones, ByRef ans)
+ClassMethod solveForNumberOfBlinks(ByRef stones, numberOfBlinks) As %Integer
 {
-    for i=1:1:25 {
-        do ..Blink(.stones)
-    }
-
-    s st=""
-
-    s ans = stones
-    for{
-        s st=$o(stones(st))
-        q:(st="")
-        do $I(ans(stones(st)))
-    }
-}
-
-ClassMethod sovlePart2(ByRef stones) As %Integer
-{
-    s dp = 0
-    s sum = 0
+   
+    s stonesCopy = ""
     for i=1:1:stones {
-        if $get(dp(stones(i)),-1)=-1 {
-            KILL tstones,ans
-            s tstones=1
-            s tstones(1) = stones(i)
-            do ..Part2Sol(.tstones,.ans)
-            Merge dp(stones(i)) = ans
-        }
-        s p1 = stones(i)
-        s p2 = ""
+        do $I(stonesCopy(0,stones(i)))
+    }
+    
+    for i=1:1:numberOfBlinks {
+        s it = ""
         for {
-            s p2 = $order(dp(p1,p2))
-            q:(p2="")
-            if $get(dp(p2),-1)=-1 {
-                KILL tstones,ans
-                s tstones=1
-                s tstones(1) = p2
-                do ..Part2Sol(.tstones,.ans)
-                Merge dp(p2) = ans
-            }
-            s p3 = ""
-            for {
-                s p3 = $order(dp(p2,p3))
-                q:(p3="")
-                if $get(dp(p3),-1)=-1 {
-                    KILL tstones,ans
-                    s tstones=1
-                    s tstones(1) = p3
-                    do ..Part2Sol(.tstones,.ans)
-                    Merge dp(p3) = ans
-                } 
-                s sum = sum + (dp(p3)*dp(p2,p3)*dp(p1,p2))
+            s it = $o(stonesCopy(i-1,it))
+            q:(it="")
+            do ..ApplyRule(it, .newStone)
+            
+            
+            s multiplier = stonesCopy(i-1,it)
+            s stonesCopy(i,newStone(0)) = $GET(stonesCopy(i,newStone(0)),0) + multiplier
+            if newStone = 2 {
+                s stonesCopy(i,newStone(1)) = $GET(stonesCopy(i,newStone(1)),0) + multiplier
             }
         }
+    }
+    s it = "" 
+    s sum = 0
+    for {
+        s it = $O(stonesCopy(numberOfBlinks,it))
+        q:(it="")
+        s sum = sum + stonesCopy(numberOfBlinks,it)
     }
     return sum
 }
