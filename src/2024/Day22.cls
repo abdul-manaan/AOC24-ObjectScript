@@ -49,35 +49,14 @@ ClassMethod Part1(filename = "") As %Integer
     return sum
 }
 
-ClassMethod getNthSecret(number, n)
+ClassMethod getNthSecret(number, n, ByRef dp)
 {
+   
     for i=1:1:n {
-        set number = ..applyStep3(..applyStep2(..applyStep1(number)))
+        s s1 = $zb(number,(number*64),6) # 16777216
+        s s2 = $zb(s1,(s1\32),6) # 16777216
+        s number = $zb(s2,(s2*2048),6) # 16777216
     }
-    return number
-}
-
-ClassMethod applyStep1(secret)
-{
-    s number = secret*64
-    s number = $ZBOOLEAN(secret,number,6)
-    s number = number # 16777216
-    return number
-}
-
-ClassMethod applyStep2(secret)
-{
-    s number = secret\32
-    s number = $ZBOOLEAN(secret,number,6)
-    s number = number # 16777216
-    return number
-}
-
-ClassMethod applyStep3(secret)
-{
-    s number = secret*2048
-    s number = $ZBOOLEAN(secret,number,6)
-    s number = number # 16777216
     return number
 }
 
@@ -87,11 +66,15 @@ ClassMethod getNthSecretWithDP(number, n, ByRef dp, idx, ByRef maxBananas)
     s newUnit = number#10
     for i=1:1:n {
         s prevUnit = newUnit
-        set number = ..applyStep3(..applyStep2(..applyStep1(number)))
+        s s1 = $zb(number,(number*64),6) # 16777216
+        s s2 = $zb(s1,(s1\32),6) # 16777216
+        s number = $zb(s2,(s2*2048),6) # 16777216
 
         s newUnit = number#10
+
         s seq = seq _ "," _ (newUnit - prevUnit)
 
+        
         s seq = $e(seq,$find(seq,","),*)
         if $GET(dp(seq,idx),-1) = -1 {
             do $I(dp(seq,idx))
