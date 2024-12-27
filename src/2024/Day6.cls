@@ -11,28 +11,32 @@ ClassMethod Part2(filename = "") As %Integer
     }
     set stream=..GetInput(filename)
     set sum = 0
-    set puzzleMap = ""
-    set curLineNo = 0
 
-    // Parse input and build puzzleMap
-    while 'stream.AtEnd {
-        set line = stream.ReadLine()
-        set curLineNo = curLineNo + 1
-        set puzzleMap(curLineNo) = line
-        if $FIND(line, "^") {
-            set startPos = curLineNo
+    set curLineNo = 0
+    set puzzleMap = 0
+	while 'stream.AtEnd {
+		set line=stream.ReadLine()
+        s curLineNo = curLineNo + 1
+        s puzzleMap($I(puzzleMap)) = line
+        if $l(line,"^") > 1 {
+            s startPos = curLineNo
         }
     }
 
+    // Find path that guard originally take
+    // so that we can obstacle to only those positions that are in path of guard
+    do ..SolvePuzzle(.puzzleMap, startPos)
+
     // Optimize map traversal
+    s TOTALCOLS = $l(puzzleMap(1))
     for r=1:1:curLineNo {
-        for c=1:1:$LENGTH(puzzleMap(r)) {
-            if ($EXTRACT(puzzleMap(r), c) = ".") {
+        for c=1:1:TOTALCOLS {
+            if ($EXTRACT(puzzleMap(r), c) = "0") {
                 // Modify cell, check if stuck, and revert
                 s $EXTRACT(puzzleMap(r), c) = "#"
                 s stuck = ..AreWeStuck(.puzzleMap, startPos)
                 set sum = sum + stuck
-                s $EXTRACT(puzzleMap(r), c) = "."
+                s $EXTRACT(puzzleMap(r), c) = "0"
             }
         }
     }
@@ -79,7 +83,6 @@ ClassMethod SolvePuzzle(ByRef puzzleMap, row, col = 0) As %Integer
     s colDir = 0
     s count = 1
     for {
-        
         s newRow = row + rowDir
         s newCol = col + colDir 
 
@@ -115,6 +118,12 @@ ClassMethod SolvePuzzle(ByRef puzzleMap, row, col = 0) As %Integer
     return count
 }
 
+/*
+Checking if we are stuck:
+- if we we visist same node again, 
+- while coming from same direction, as we were visiting last time,
+- it would means we ARE STUCK!
+*/
 ClassMethod AreWeStuck(ByRef puzzleMap, row, col = 0) As %Integer
 {
     s weStuck = 0
@@ -125,14 +134,15 @@ ClassMethod AreWeStuck(ByRef puzzleMap, row, col = 0) As %Integer
     s rowDir = -1
     s colDir = 0
     s visitedPositions = ""
-
+    s TOTALROWS = $ORDER(puzzleMap(""), -1)
+    s TOTALCOLS = $LENGTH(puzzleMap(1))
     for {
         // Calculate the next position
         s newRow = row + rowDir
         s newCol = col + colDir
         
         // Check if new position is out of bounds
-        if (newRow > $ORDER(puzzleMap(""), -1)) || (newRow < 1) || (newCol > $LENGTH(puzzleMap(1))) || (newCol < 1) {
+        if (newRow > TOTALROWS) || (newRow < 1) || (newCol > TOTALCOLS) || (newCol < 1) {
             QUIT
         }
         
@@ -157,14 +167,15 @@ ClassMethod AreWeStuck(ByRef puzzleMap, row, col = 0) As %Integer
         s col = newCol
         
         // Track visited positions
-        s posKey = newRow_","_newCol
-        s visitedPositions(posKey) = $GET(visitedPositions(posKey)) + 1
+        s newDirection = $LISTBUILD(rowDir,colDir)
 
         // Check if position is visited too frequently
-        if visitedPositions(posKey) > 4 {
+        if $LISTSAME($get(visitedPositions(newRow,newCol),$lb()), newDirection) {
             s weStuck = 1
             QUIT
         }
+        s visitedPositions(newRow,newCol) = newDirection
+
     }
 
     return weStuck
